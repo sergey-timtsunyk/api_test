@@ -1,0 +1,57 @@
+LoggerBundle\Entity\Logger:
+    type: entity
+    table: loggers
+    repositoryClass: LoggerBundle\Persistent\LoggerRepository
+    indexes:
+        header_body_fulltext:
+            columns:
+                - header
+                - body
+    uniqueConstraints:
+        loggers_id_uindex:
+            columns:
+                - id
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        ip:
+            type: string
+            nullable: false
+            length: 15
+            options:
+                fixed: false
+        route:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+        method:
+            type: string
+            nullable: false
+            length: 8
+            options:
+                fixed: false
+        datetime:
+            type: datetime
+            nullable: false
+        body:
+            type: text
+            nullable: false
+            length: 65535
+            options:
+                fixed: false
+        header:
+            type: text
+            nullable: false
+            length: 65535
+            options:
+                fixed: false
+    lifecycleCallbacks: {prePersist: [ setDatePrePersist ]}

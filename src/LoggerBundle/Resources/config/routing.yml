@@ -1,0 +1,4 @@
+logger:
+    resource: '@LoggerBundle/Controller'
+    type: rest
+    prefix: /logger

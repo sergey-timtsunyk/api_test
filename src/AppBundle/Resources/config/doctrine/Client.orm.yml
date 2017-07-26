@@ -1,0 +1,38 @@
+AppBundle\Entity\Client:
+    type: entity
+    table: clients
+    repositoryClass: AppBundle\Persistent\ClientRepository
+    uniqueConstraints:
+        clients_id_uindex:
+            columns:
+                - id
+        clients_uudi_uindex:
+            columns:
+                - uudi
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        uudi:
+            type: string
+            nullable: false
+        name:
+            type: string
+            nullable: false
+            length: 25
+            options:
+                fixed: false
+        email:
+            type: string
+            nullable: false
+            length: 25
+            options:
+                fixed: false
+    lifecycleCallbacks:
+        prePersist: [prePersistInit]

@@ -1,0 +1,12 @@
+services:
+    app.services_transform_representation.request.client_representation:
+        class: AppBundle\Services\TransformRepresentation\TransformByRequest
+        arguments: ['@jms_serializer', '@validator']
+        calls:
+            - [setClassPath, [AppBundle\Representation\Request\ClientRepresentation]]
+
+    app.services_transform_representation.request.order_representation:
+        class: AppBundle\Services\TransformRepresentation\TransformByRequest
+        arguments: ['@jms_serializer', '@validator']
+        calls:
+            - [setClassPath, [AppBundle\Representation\Request\OrderRepresentation]]

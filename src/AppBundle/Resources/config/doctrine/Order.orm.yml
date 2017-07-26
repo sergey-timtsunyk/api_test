@@ -1,0 +1,48 @@
+AppBundle\Entity\Order:
+    type: entity
+    table: orders
+    repositoryClass: AppBundle\Persistent\OrderRepository
+    indexes:
+        orders_clients_id_fk:
+            columns:
+                - client_id
+    uniqueConstraints:
+        orders_id_uindex:
+            columns:
+                - id
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        amount:
+            type: decimal
+            nullable: false
+            precision: 12
+            scale: 2
+        title:
+            type: string
+            nullable: false
+            length: 25
+            options:
+                fixed: false
+        datetime:
+            type: datetime
+    manyToOne:
+        client:
+            targetEntity: Client
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                client_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks:
+         prePersist: [prePersistInit]

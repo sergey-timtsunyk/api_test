@@ -1,0 +1,16 @@
+services:
+    logger.services_subscriber.api_request:
+        class: LoggerBundle\Services\Subscribe\LoggerApiRequestSubscriber
+        arguments: ['@logger.services_creator.logger_creator']
+        tags:
+            - { name: kernel.event_subscriber }
+
+    logger.services_creator.logger_creator:
+        class: LoggerBundle\Services\Creator\LoggerCreator
+        arguments: ['@logger.logger_repository']
+
+    logger.logger_repository:
+        class: LoggerBundle\Persistent\LoggerRepository
+        factory: ['@doctrine', getRepository]
+        arguments:
+            - LoggerBundle\Entity\Logger
